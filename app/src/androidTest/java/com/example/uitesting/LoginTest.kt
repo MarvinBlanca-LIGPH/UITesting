@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 class LoginTest{
     @JvmField
     @Rule
-    var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var mActivityRule: ActivityTestRule<LoginActivity> = ActivityTestRule(LoginActivity::class.java)
 
     @Test
     fun successLoginTest() {
@@ -35,6 +35,19 @@ class LoginTest{
 
         onView(withId(R.id.password))
             .perform(typeText("pass"))
+
+        onView(withId(R.id.button_login))
+            .check(matches(isDisplayed()))
+            .perform(click())
+    }
+
+    @Test
+    fun failedLoginTest2() {
+        onView(withId(R.id.username))
+            .perform(typeText(""))
+
+        onView(withId(R.id.password))
+            .perform(typeText("password"))
 
         onView(withId(R.id.button_login))
             .check(matches(isDisplayed()))
